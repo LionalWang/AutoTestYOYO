@@ -3,10 +3,7 @@ package com.yoyo.test;
 
 
 import android.os.RemoteException;
-import com.android.uiautomator.core.UiDevice;
-import com.android.uiautomator.core.UiObject;
-import com.android.uiautomator.core.UiObjectNotFoundException;
-import com.android.uiautomator.core.UiSelector;
+import com.android.uiautomator.core.*;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 
@@ -20,9 +17,11 @@ public class TestYoYo extends UiAutomatorTestCase{
 
         while (true) {
             int i = (int) (Math.random()*10);
-            if (i<6) {
+            if (i<5) {
+                //Configurator.getInstance().setActionAcknowledgmentTimeout(100);
                 pressLike();
             } else {
+                //Configurator.getInstance().setActionAcknowledgmentTimeout(2000);
                 comment();
             }
         }
@@ -38,7 +37,6 @@ public class TestYoYo extends UiAutomatorTestCase{
         try {
             for (int i=0; i<5; i++) {
                 like.click();
-                sleep(100);
             }
         } catch (UiObjectNotFoundException e) {
             System.out.println("点赞失败");
@@ -50,6 +48,7 @@ public class TestYoYo extends UiAutomatorTestCase{
     /**评论方法**/
     public void comment() {
         UiObject text = new UiObject(new UiSelector().className("android.widget.EditText"));
+        int a = (int) (Math.random()*5);
         try {
             text.click();
         } catch (UiObjectNotFoundException e) {
@@ -58,7 +57,19 @@ public class TestYoYo extends UiAutomatorTestCase{
         sleep(200);
 
         try {
-            text.setText("test");
+            if (a==0) {
+                text.setText("test0");
+            } else if (a==1) {
+                text.setText("test1");
+            } else if (a==2) {
+                text.setText("test2");
+            } else if (a==3) {
+                text.setText("test3");
+            } else if (a==4) {
+                text.setText("test4");
+            } else {
+                text.setText("test5");
+            }
         } catch (UiObjectNotFoundException e) {
             System.out.println("输入失败");
         }
