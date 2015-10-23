@@ -31,9 +31,9 @@ public class TestYoYo extends UiAutomatorTestCase{
     /**点赞方法**/
     public void pressLike() {
         UiObject like = new UiObject(new UiSelector().className("android.widget.RelativeLayout").index(0).
-                childSelector(new UiSelector().className("android.widget.RelativeLayout").index(1).
+                childSelector(new UiSelector().className("android.widget.RelativeLayout").index(0).
                         childSelector(new UiSelector().className("android.widget.RelativeLayout").index(2).
-                                childSelector(new UiSelector().className("android.widget.ImageView").index(1)))));
+                                childSelector(new UiSelector().className("android.widget.ImageView")))));
         try {
             for (int i=0; i<5; i++) {
                 like.click();
