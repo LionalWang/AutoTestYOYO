@@ -10,6 +10,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class TestYoYo extends UiAutomatorTestCase{
     public void testRandom() throws RemoteException {
+        Configurator.getInstance().setActionAcknowledgmentTimeout(10);
 
         if (!UiDevice.getInstance().isScreenOn()) {
             UiDevice.getInstance().wakeUp();
@@ -18,10 +19,8 @@ public class TestYoYo extends UiAutomatorTestCase{
         while (true) {
             int i = (int) (Math.random()*10);
             if (i<5) {
-                //Configurator.getInstance().setActionAcknowledgmentTimeout(100);
                 pressLike();
             } else {
-                //Configurator.getInstance().setActionAcknowledgmentTimeout(2000);
                 comment();
             }
         }
@@ -31,17 +30,16 @@ public class TestYoYo extends UiAutomatorTestCase{
     /**点赞方法**/
     public void pressLike() {
         UiObject like = new UiObject(new UiSelector().className("android.widget.RelativeLayout").index(0).
-                childSelector(new UiSelector().className("android.widget.RelativeLayout").index(0).
+                childSelector(new UiSelector().className("android.widget.RelativeLayout").index(1).
                         childSelector(new UiSelector().className("android.widget.RelativeLayout").index(2).
                                 childSelector(new UiSelector().className("android.widget.ImageView")))));
         try {
-            for (int i=0; i<5; i++) {
+            for (int i=0; i<15; i++) {
                 like.click();
             }
         } catch (UiObjectNotFoundException e) {
             System.out.println("点赞失败");
         }
-        sleep(200);
     }
 
 
@@ -54,7 +52,6 @@ public class TestYoYo extends UiAutomatorTestCase{
         } catch (UiObjectNotFoundException e) {
             System.out.println("点击输入框失败");
         }
-        sleep(200);
 
         try {
             if (a==0) {
@@ -73,7 +70,6 @@ public class TestYoYo extends UiAutomatorTestCase{
         } catch (UiObjectNotFoundException e) {
             System.out.println("输入失败");
         }
-        sleep(100);
 
         UiObject send = new UiObject(new UiSelector().text("发送"));
         try {
@@ -81,6 +77,5 @@ public class TestYoYo extends UiAutomatorTestCase{
         } catch (UiObjectNotFoundException e) {
             System.out.println("发送失败");
         }
-        sleep(100);
     }
 }
